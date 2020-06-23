@@ -1,5 +1,5 @@
 printMessage('Czekam na Twój ruch...');
-printMessage('------------------------------');
+printMessage('-------------------------');
 
 // gracz wybiera ruch - przed komputerem - jego ruchu nie może jeszcze znać
 
@@ -7,59 +7,50 @@ let playerInput = prompt('Wybierz swój ruch! 1: kamień, 2: papier, 3: nożyce.
 
 console.log('Gracz wpisał: ' + playerInput);
 
-let playerMove = 'niewłaściwe zagranie';
-
-if(playerInput == 1) {
-	playerMove = 'kamień';
-	
-} else if(playerInput == 2) {
-	playerMove = 'papier';
-	
-} else if(playerInput == 3) {
-	playerMove = 'nożyce';
-	
-} else if(playerInput !== 3 && playerInput !== 2 && playerInput !== 1) {
-	playerMove = 'niewłaściwe zagranie';
-}
-
-printMessage('Twój ruch to: ' + playerMove);
-printMessage('------------------------------');
-
 // komputer losowo wybiera ruch
 
 let randomNumber = Math.floor(Math.random() * 3 + 1);
 
-console.log('Wylosowana liczba to: ' + randomNumber);
+console.log('Wylosowana liczba przez komputer to: ' + randomNumber);
 
-let computerMove = 'nieznany ruch';
+let playerMove = getMoveName(playerInput);
+let computerMove = getMoveName(randomNumber);
 
-if(randomNumber == 1) {
-	computerMove = 'kamień';
-	
-} else if(randomNumber == 2) {
-	computerMove = 'papier';
-	
-} else if(randomNumber == 3) {
-	computerMove = 'nożyce';
-	
-} else if(randomNumber !== 3 && randomNumber !== 2 && randomNumber !== 1) {
-	computerMove = 'nieznany ruch';
+function getMoveName(argMoveId){
+  if(argMoveId == 1){
+    return 'kamień';
+  } else if(argMoveId == 2){
+    return 'papier';
+  } else if(argMoveId == 3){
+    return 'nożyce';
+  } else {
+    printMessage('Nie ma ruchu oznaczonego jako: ' + argMoveId + '. Możesz wybrać: 1, 2 lub 3');
+    return 'niewłaściwe zagranie';
+  }
 }
 
-printMessage('Mój ruch to: ' + computerMove);
-printMessage('------------------------------');
-printMessage('WYNIK POTYCZKI:');
+/* console.log(getMoveName('2')); */
+console.log('moves:', playerMove, computerMove);
+console.log('Ty zagrałe(a)ś: ' + playerMove);
+console.log('computer zagrał: ' + computerMove);
 
-// Wynik gry:
+// Wynik gry
 
-if(( computerMove == 'kamień' && playerMove == 'papier') || ( computerMove == 'nożyce' && playerMove == 'kamień') || ( computerMove == 'papier' && playerMove == 'nożyce')){
-  printMessage('Gratuluję! Wygrywasz!');
-} else if(( computerMove == 'papier' && playerMove == 'kamień') || ( computerMove == 'kamień' && playerMove == 'nożyce') || ( computerMove == 'nożyce' && playerMove == 'papier')){
-  printMessage('Hura! Wygrałem!');
-} else if(( computerMove == 'kamień' && playerMove == 'kamień') || ( computerMove == 'papier' && playerMove == 'papier') || ( computerMove == 'nożyce' && playerMove == 'nożyce') || ( computerMove == 'nieznany ruch' && playerMove == 'niewłaściwe zagranie')){
-  printMessage('Fajnie. Jest remis! Wybraliśmy to samo');
-} else if( playerMove == 'niewłaściwe zagranie' && (computerMove == 'kamień' || computerMove == 'papier' || computerMove == 'nożyce')){
-  printMessage('Wygrywam walkowerem, bo zastosowałe(a)ś niewłaściwe zagranie. Masz wybrać cyfrę: 1, 2 lub 3!');
-} else if( computerMove == 'nieznany ruch' && (playerMove == 'kamień' || playerMove == 'papier' || playerMove == 'nożyce')){
-  printMessage('Przegrywam, bo zastosowałem nieznany ruch');
-}
+let result = displayResult(computerMove, playerMove);
+
+function displayResult(argComputerMove, argPlayerMove) {
+	console.log('argumenty: ' + argComputerMove + ', ' + argPlayerMove);
+  printMessage('WYNIK POTYCZKI (ja - Ty): ' + argComputerMove + ' - ' + argPlayerMove);
+
+	if(( argComputerMove == 'kamień' && argPlayerMove == 'papier') || (argComputerMove == 'nożyce' && argPlayerMove == 'kamień') || (argComputerMove == 'papier' && argPlayerMove == 'nożyce')) {
+    printMessage('Gratuluję! Wygrywasz!');
+	} else if ((argComputerMove == 'papier' && argPlayerMove == 'kamień') || (argComputerMove == 'kamień' && argPlayerMove == 'nożyce') || (argComputerMove == 'nożyce' && argPlayerMove == 'papier')){
+    printMessage('Hura! Wygrałem! Ty tym razem przegrywasz :(');
+	} else if (playerMove == 'niewłaściwe zagranie' && (argComputerMove == 'kamień' || argComputerMove == 'papier' || argComputerMove == 'nożyce')){
+	printMessage('Wygrywam walkowerem, bo zastosowałe(a)ś niewłaściwe zagranie. Masz wybrać cyfrę: 1, 2 lub 3!');
+	} else if (argComputerMove == 'niewłaściwe zagranie' && (argPlayerMove == 'kamień' || argPlayerMove == 'papier' || argPlayerMove == 'nożyce')){
+	printMessage('Przegrywam, bo zastosowałem niewłaściwe zagranie');
+	} else {
+	printMessage('Fajnie. Jest remis! Wybraliśmy to samo');
+	}
+ }
