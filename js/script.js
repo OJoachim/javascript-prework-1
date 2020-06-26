@@ -1,7 +1,7 @@
-function playGame(playerInput) {
+const playGame = function(playerInput) {
   
   /* FUNKCJE POMOCNICZNE */
-  function displayResult(argComputerMove, argPlayerMove) {
+  const displayResult = function(argComputerMove, argPlayerMove) {
     printMessage('WYNIK POTYCZKI (ja - Ty): ' + argComputerMove + ' - ' + argPlayerMove);
 
 	 if ((argComputerMove == 'kamień' && argPlayerMove == 'papier') 
