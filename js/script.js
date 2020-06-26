@@ -8,7 +8,7 @@ function playGame(playerInput) {
       || (argComputerMove == 'nożyce' && argPlayerMove == 'kamień') 
       || (argComputerMove == 'papier' && argPlayerMove == 'nożyce')) {
       printMessage('Gratuluję! Wygrywasz!');
-	 } else if (argComputerMove === argComputerMove) {
+	 } else if (argComputerMove === argPlayerMove) {
      	printMessage('Fajnie. Jest remis! Wybraliśmy to samo');
 	 } else {
      printMessage('Hura! Wygrałem! Ty tym razem przegrywasz :(');
