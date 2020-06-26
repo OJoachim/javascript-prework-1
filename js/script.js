@@ -15,7 +15,7 @@ const playGame = function(playerInput) {
 	 }
   }
   
-  function getMoveName(argMoveId){
+  const getMoveName = function(argMoveId){
     if(argMoveId == 1){
       return 'kamień';
     } else if(argMoveId == 2){
@@ -28,9 +28,9 @@ const playGame = function(playerInput) {
   /* PROCES GRY */
   clearMessages();
   // komputer losowo wybiera swój ruch
-  let randomNumber = Math.floor(Math.random() * 3 + 1);
-  let playerMove = getMoveName(playerInput);
-  let computerMove = getMoveName(randomNumber);
+  const randomNumber = Math.floor(Math.random() * 3 + 1);
+  const playerMove = getMoveName(playerInput);
+  const computerMove = getMoveName(randomNumber);
 
   // Ustalamy kto wygrał
   displayResult(computerMove, playerMove);
